@@ -3,18 +3,30 @@ using System.Collections;
 
 public class StreamCSharp : MonoBehaviour {
 
-	public string url = "http://192.168.12.1:9999";
+	public string url = "http://127.0.0.1:9999";
 
 	// Use this for initialization
-	public void Start () {
-
+	IEnumerator Start () {
+		yield break;
 	}
-	
-	// Update is called once per frame
-	public IEnumerable Update () {
+
+	IEnumerator UpdateScreengrab() {
 		WWW www = new WWW (url);
 		yield return www;
 		Renderer renderer = GetComponent<Renderer> ();
-		renderer.material.mainTexture = www.texture;
+		Texture2D tex = null;
+		try {
+			tex = www.texture;
+		} catch {
+			Debug.Log ("Failed to load image");
+		}
+		if (tex != null) {
+			renderer.material.mainTexture = tex;
+		}
+	}
+
+	// Update is called once per frame
+	void Update () {
+		StartCoroutine (UpdateScreengrab ());
 	}
 }
