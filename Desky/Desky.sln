@@ -1,14 +1,24 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-
+Project("{D455344F-3DA9-7404-293C-4BDD89EC214E}") = "Desky", "Assembly-CSharp.csproj", "{5FB80219-40D2-D01A-DCD1-7860EE2F3674}"
+EndProject
+Project("{D455344F-3DA9-7404-293C-4BDD89EC214E}") = "Desky", "Assembly-CSharp-Editor.csproj", "{ECCBB383-74B1-6C61-8CAF-B3714F980D90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-
+		{5FB80219-40D2-D01A-DCD1-7860EE2F3674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB80219-40D2-D01A-DCD1-7860EE2F3674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB80219-40D2-D01A-DCD1-7860EE2F3674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB80219-40D2-D01A-DCD1-7860EE2F3674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECCBB383-74B1-6C61-8CAF-B3714F980D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECCBB383-74B1-6C61-8CAF-B3714F980D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECCBB383-74B1-6C61-8CAF-B3714F980D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECCBB383-74B1-6C61-8CAF-B3714F980D90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

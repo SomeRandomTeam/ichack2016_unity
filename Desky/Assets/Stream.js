@@ -1,6 +1,6 @@
 ﻿#pragma strict
 
-var url = "http://mishrabhinav.com/assets/img/avatar.jpg";
+var url = "http://secondapps.com/countdown/t1456812000z0.png";
 
 function Start () {
 	// Create a texture in DXT1 format
@@ -19,5 +19,5 @@ function Start () {
 
 function Update () {
 
-	url = "http://mishrabhinav.com/assets/img/mymos.jpg";
+	url = "http://secondapps.com/countdown/t1456812000z0.png";
 }
