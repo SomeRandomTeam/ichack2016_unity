@@ -1,0 +1,17 @@
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/dbrion/ichack2016_unity/Stream/obj/Debug/Assembly-CSharp.dll
+/Users/dbrion/ichack2016_unity/Stream/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/UnityEngine.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/UnityEditor.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Mono.Cecil.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Unity.DataContract.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/dbrion/ichack2016_unity/Stream/Temp/bin/Debug/Mono.Cecil.Mdb.dll

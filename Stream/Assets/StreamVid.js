@@ -1,5 +1,7 @@
 ﻿#pragma strict
 
+var urlIndex = 0;
+
 var url = "http://192.168.12.1:9999/";
 
 function Start () {
@@ -19,5 +21,9 @@ function Start () {
 
 function Update () {
 
+    if(Cardboard.SDK.CardboardTriggered) {
+      var switchDesk = new WWW(url + ((urlIndex+1)%6 + 1));
+      yield switchDesk;
+    }
 	url = "http://192.168.12.1:9999/";
 }
