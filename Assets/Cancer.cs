@@ -3,8 +3,11 @@ using System.Collections;
 
 public class Cancer : MonoBehaviour {
 
+	public bool mainScreen = false;
+
 	public string url = "http://192.168.12.1:9999/";
 	public string newRequest = "http://192.168.12.1:9999/switch/0";
+
 	private bool firstLoad = true;
 	private double delay = 0.0d;
 
@@ -27,9 +30,16 @@ public class Cancer : MonoBehaviour {
 		if (firstLoad) {
 			firstLoad = false;
 			StartCoroutine (display ());
-		} else if (Time.time > delay && isLookedAt) {
-			delay = Time.time + 2.0d;
-			StartCoroutine (display ());
+		} else if (isLookedAt) {
+			// First detect trigger then magnify
+			if (Cardboard.SDK.Triggered) {
+				Camera.main.transform.position = new Vector3 (-110, 0, 0);
+			}
+			//Then look for time delay and refresh
+			else if (Time.time > delay) {
+			  delay = Time.time + 2.0d;
+			  StartCoroutine (display ());
+			}
 		}
 	}
 
