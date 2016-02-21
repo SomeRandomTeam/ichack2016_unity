@@ -6,9 +6,13 @@ public class Cancer : MonoBehaviour {
 	private const float updateFrequency = 1.0f;
 
 	public bool mainScreen = false;
+	public bool rightScreen = false;
+	public bool leftScreen = false;
+
+	int currentDisplay = 0;
 
 	public string url;
-	public string switchRequestUrl;
+	public int switchRequestId;
 
 	private double nextGrabIn = 0.0f;
 
@@ -18,6 +22,8 @@ public class Cancer : MonoBehaviour {
 	IEnumerator Start () {
 		head = Camera.main.GetComponent<StereoController> ().Head;
 		yield return StartCoroutine (GrabScreen ());
+		getCurrentDisplay ();
+		checkRightLeft ();
 		yield break;
 	}
 
@@ -25,21 +31,18 @@ public class Cancer : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		bool isLookedAt = IsLookedAt ();
-		//Debug.Log (isLookedAt);
 		if (isLookedAt) {
 			StartCoroutine (SwitchTo ());
-			// First detect trigger then magnify
-			if (Cardboard.SDK.Triggered) {
-				Magnify ();
-			}
-
-			//Then look for time passed and refresh
 			nextGrabIn -= Time.deltaTime;
 			if (nextGrabIn <= 0.0f) {
 				StartCoroutine (GrabScreen ());
 				nextGrabIn = updateFrequency;
 			}
 		}
+
+		getCurrentDisplay ();
+		checkRightLeft ();
+
 	}
 
 	bool IsLookedAt() {
@@ -47,17 +50,21 @@ public class Cancer : MonoBehaviour {
 		return GetComponent<Collider> ().Raycast (head.Gaze, out hit, Mathf.Infinity);
 	}
 
-	void Magnify() {
-		Camera.main.transform.position = new Vector3 (-110, 0, 0);
-	}
-
 	IEnumerator SwitchTo() {
-		WWW nwww = new WWW (switchRequestUrl);
-		yield return nwww;
+		if (!mainScreen) {
+			WWW nwww = new WWW (url + "switch/" + switchRequestId);
+			yield return nwww;
+		}
 		yield break;
 	}
 
 	IEnumerator GrabScreen() {
+
+		StartCoroutine (SwitchTo());
+
+		getCurrentDisplay ();
+		checkRightLeft ();
+
 		WWW www = new WWW (url);
 		yield return www;
 
@@ -73,5 +80,21 @@ public class Cancer : MonoBehaviour {
 
 		nextGrabIn = Time.time + 1.0d;
 		yield break;
+	}
+
+	IEnumerator getCurrentDisplay() {
+		WWW disp = new WWW (url + "desktop");
+		yield return disp;
+		currentDisplay = int.Parse (disp.text);
+	}
+
+	void checkRightLeft() {
+		getCurrentDisplay ();
+		if (rightScreen){
+			switchRequestId = (currentDisplay + 1) % 6; 
+
+		} else if (leftScreen) {
+			switchRequestId = (currentDisplay + 5) % 6; 
+		}
 	}
 }
