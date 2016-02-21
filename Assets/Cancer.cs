@@ -13,7 +13,9 @@ public class Cancer : MonoBehaviour {
 	// Use this for initialization
 	IEnumerator Start () {
 		head = Camera.main.GetComponent<StereoController> ().Head;
+
 		yield break;
+
 	}
 
 
