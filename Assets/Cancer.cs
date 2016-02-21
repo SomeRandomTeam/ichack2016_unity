@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Cancer : MonoBehaviour {
 
-	private const float updateFrequency = 1.0f;
+	private const float updateFrequency = 0.33f;
 
 	public bool mainScreen = false;
 	public bool rightScreen = false;
@@ -23,8 +23,7 @@ public class Cancer : MonoBehaviour {
 	IEnumerator Start () {
 		head = Camera.main.GetComponent<StereoController> ().Head;
 		yield return StartCoroutine (GrabScreen ());
-		getCurrentDisplay ();
-		checkRightLeft ();
+		yield return StartCoroutine (checkRightLeft ());
 		yield break;
 	}
 
@@ -33,17 +32,13 @@ public class Cancer : MonoBehaviour {
 	void Update () {
 		bool isLookedAt = IsLookedAt ();
 		if (isLookedAt) {
-			StartCoroutine (SwitchTo ());
 			nextGrabIn -= Time.deltaTime;
 			if (nextGrabIn <= 0.0f) {
 				StartCoroutine (GrabScreen ());
 				nextGrabIn = updateFrequency;
 			}
 		}
-
-		getCurrentDisplay ();
 		checkRightLeft ();
-
 	}
 
 	bool IsLookedAt() {
@@ -61,10 +56,9 @@ public class Cancer : MonoBehaviour {
 
 	IEnumerator GrabScreen() {
 
-		StartCoroutine (SwitchTo());
+		yield return StartCoroutine (SwitchTo());
 
-		getCurrentDisplay ();
-		checkRightLeft ();
+		yield return StartCoroutine(checkRightLeft ());
 
 		if (BroadcastService.GetAddress () != null) {
 			WWW www = new WWW ("http://" + BroadcastService.GetAddress ().ToString() + ":9999");
@@ -94,13 +88,14 @@ public class Cancer : MonoBehaviour {
 		yield break;
 	}
 
-	void checkRightLeft() {
-		getCurrentDisplay ();
+	IEnumerator checkRightLeft() {
+		yield return StartCoroutine (getCurrentDisplay ());
 		if (rightScreen){
 			switchRequestId = (currentDisplay + 1) % 6; 
 
 		} else if (leftScreen) {
 			switchRequestId = (currentDisplay + 5) % 6; 
 		}
+		yield break;
 	}
 }
