@@ -30,16 +30,9 @@ public class Cancer : MonoBehaviour {
 		if (firstLoad) {
 			firstLoad = false;
 			StartCoroutine (display ());
-		} else if (isLookedAt) {
-			// First detect trigger then magnify
-			if (Cardboard.SDK.Triggered) {
-				Camera.main.transform.position = new Vector3 (-110, 0, 0);
-			}
-			//Then look for time delay and refresh
-			else if (Time.time > delay) {
+		} else if (Time.time > delay && isLookedAt) {
 			  delay = Time.time + 2.0d;
 			  StartCoroutine (display ());
-			}
 		}
 	}
 
