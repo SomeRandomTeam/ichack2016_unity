@@ -58,7 +58,7 @@ public class Cancer : MonoBehaviour {
 		if (tex != null) {
 			renderer.material.mainTexture = tex;
 		}
-		delay = Time.time + 2.0d;
+		delay = Time.time + 1.0d;
 
 	}
 
