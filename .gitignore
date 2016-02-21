@@ -1,6 +1,9 @@
 
 # Created by https://www.gitignore.io/api/unity
 
+# Generated
+*.apk
+
 ### Unity ###
 /[Ll]ibrary/
 /[Tt]emp/
