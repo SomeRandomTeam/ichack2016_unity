@@ -11,12 +11,13 @@ public class Cancer : MonoBehaviour {
 
 	int currentDisplay = 0;
 
-	public string url;
 	public int switchRequestId;
 
 	private double nextGrabIn = 0.0f;
 
 	private CardboardHead head;
+
+
 
 	// Use this for initialization
 	IEnumerator Start () {
@@ -51,8 +52,8 @@ public class Cancer : MonoBehaviour {
 	}
 
 	IEnumerator SwitchTo() {
-		if (!mainScreen) {
-			WWW nwww = new WWW (url + "switch/" + switchRequestId);
+		if (!mainScreen && BroadcastService.GetAddress() != null) {
+			WWW nwww = new WWW ("http://" + BroadcastService.GetAddress ().ToString() + ":9999" + "/switch/" + switchRequestId);
 			yield return nwww;
 		}
 		yield break;
@@ -65,17 +66,19 @@ public class Cancer : MonoBehaviour {
 		getCurrentDisplay ();
 		checkRightLeft ();
 
-		WWW www = new WWW (url);
-		yield return www;
+		if (BroadcastService.GetAddress () != null) {
+			WWW www = new WWW ("http://" + BroadcastService.GetAddress ().ToString() + ":9999");
+			yield return www;
 
-		try {
-			Texture2D tex = www.texture;
-			Renderer renderer = GetComponent<Renderer> ();
-			if (tex != null) {
-				renderer.material.mainTexture = tex;
+			try {
+				Texture2D tex = www.texture;
+				Renderer renderer = GetComponent<Renderer> ();
+				if (tex != null) {
+					renderer.material.mainTexture = tex;
+				}
+			} catch {
+				Debug.Log ("Failed to load image");
 			}
-		} catch {
-			Debug.Log ("Failed to load image");
 		}
 
 		nextGrabIn = Time.time + 1.0d;
@@ -83,9 +86,12 @@ public class Cancer : MonoBehaviour {
 	}
 
 	IEnumerator getCurrentDisplay() {
-		WWW disp = new WWW (url + "desktop");
-		yield return disp;
-		currentDisplay = int.Parse (disp.text);
+		if (BroadcastService.GetAddress () != null) {
+			WWW disp = new WWW ("http://" + BroadcastService.GetAddress ().ToString () + ":9999" + "/desktop");
+			yield return disp;
+			currentDisplay = int.Parse (disp.text);
+		}
+		yield break;
 	}
 
 	void checkRightLeft() {
